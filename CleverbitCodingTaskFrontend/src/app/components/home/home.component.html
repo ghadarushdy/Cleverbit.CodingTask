@@ -1,0 +1,47 @@
+
+    <div class="container">
+
+        <div class="login" (click)="Login()">
+            <h2>Login</h2>
+        </div>
+       
+
+        <div class="header">
+           <h2>List of matches and winners</h2>           
+        </div>
+
+        
+<div class="content">
+
+
+    <table id="matches" class="matches">
+   <thead>
+       <th>ID</th>
+       <th>Match Name</th>
+       <th>Winner Name</th>
+   </thead>
+
+   <tr *ngFor="let match of matchList; let i = index">
+
+    <td>{{i+1 }}</td>
+    <td>{{match.matchName}}</td>
+    <td>{{match.winnerName}}</td>
+   
+</tr>
+
+
+    </table>
+
+    <!-- <label>Click here to generate random number: </label>
+    <input type="button" value="Play Now" (click)="GenerateNumber()">
+
+<div class="result" id="result" hidden>
+    <label>Your generated number: {{generatedNumber}}</label>
+</div> -->
+
+
+</div>
+
+</div>
+
+

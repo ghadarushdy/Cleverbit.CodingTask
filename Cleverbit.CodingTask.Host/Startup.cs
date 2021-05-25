@@ -1,3 +1,4 @@
+using Cleverbit.CodingTask.BLL;
 using Cleverbit.CodingTask.Data;
 using Cleverbit.CodingTask.Host.Auth;
 using Cleverbit.CodingTask.Utilities;
@@ -26,13 +27,30 @@ namespace Cleverbit.CodingTask.Host
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services
-                .AddDbContext<CodingTaskContext>(
-                options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            services.AddControllers();
+            services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.IgnoreNullValues = true;
+            });
+
+            services.AddDbContext<CodingTaskContext>(
+                options => options.UseLazyLoadingProxies().UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddSingleton<IHashService>(new HashService(configuration.GetSection("HashSalt").Get<string>()));
+            services.AddTransient<IMatchDataAccess, MatchDataAccess>();
+            services.AddTransient<IMatchUsersNumbersDataAccess, MatchUsersNumbersDataAccess>();
+            services.AddTransient<IUserDataAccess, UserDataAccess>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IGame, Game>();
 
-            services.AddControllers();
+            services.AddCors(options =>
+            {
+                options.AddPolicy("cors",
+                builder =>
+                {
+                    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                });
+            });
 
             services.AddAuthentication("BasicAuthentication")
                 .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
@@ -57,6 +75,8 @@ namespace Cleverbit.CodingTask.Host
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseCors("cors");
 
             app.UseEndpoints(endpoints =>
             {

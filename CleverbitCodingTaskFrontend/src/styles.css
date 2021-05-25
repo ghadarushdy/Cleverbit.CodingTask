@@ -1,0 +1,58 @@
+/* You can add global styles to this file, and also import other style files */
+.header
+{
+  text-align: left;
+  padding: 10px;
+  font-size: 20px;
+  border-radius: 15px;
+  margin: 1rem auto;
+  line-height: 1.4;
+  border-style: double;
+  background:#efedffeb;
+  color:darkblue;
+  border:1px solid #efedffeb;
+}
+
+.content label
+{
+    font-size: 25px;
+    padding-right: 20px;
+}
+
+.content input[type='button'],input[type='submit']
+{
+    font-size: 20px;
+}
+
+.result
+{
+    padding-top: 20px;
+    font-style: oblique;
+    color: cornflowerblue;
+}
+
+.matches
+{
+    padding: 15px;
+    font-size: 25px;
+    margin: auto;
+    
+}
+
+.matches th
+{
+    padding: 20px;
+    background-color: #ccc9e7eb;
+}
+
+.matches td
+{
+    padding: 20px;
+}
+
+.login
+{
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}

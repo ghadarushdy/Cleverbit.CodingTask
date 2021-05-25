@@ -1,5 +1,4 @@
 ﻿using Cleverbit.CodingTask.Data;
-using Cleverbit.CodingTask.Data.Models;
 using Cleverbit.CodingTask.Utilities;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;

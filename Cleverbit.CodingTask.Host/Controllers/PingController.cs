@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Cleverbit.CodingTask.BLL;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using System.Security.Claims;
@@ -11,6 +12,43 @@ namespace Cleverbit.CodingTask.Host.Controllers
     [ApiController]
     public class PingController : ControllerBase
     {
+        private readonly IGame _game;
+
+        public PingController(IGame game)
+        {
+            _game = game;
+        }
+
+        [HttpGet]
+        [Route("GetRandomNumber")]
+        public int GetRandomNumber(int max)
+        {
+            return _game.GenerateNumber(max);
+        }
+
+        [HttpPost]
+        [Authorize]
+        [Route("SaveUserRandomNumber")]
+        public IActionResult SaveUserRandomNumber(UserMatchGeneratedNumber userMatchGeneratedNumber)
+        {
+            return Ok(_game.SaveUserRandomNumber(userMatchGeneratedNumber));
+        }
+
+        [HttpGet]
+        [Route("GetAllMatchesWinners")]        
+        public IActionResult GetAllMatchesWinners()
+        {
+            return Ok(_game.GetAllMatchesWinners());
+        }
+
+
+        [HttpGet]
+        [Route("GetActiveMatch")]
+        public IActionResult GetActiveMatch()
+        {
+            return Ok(_game.GetActiveMatch());
+        }
+
         // GET: api/ping
         [HttpGet]
         public string Get()

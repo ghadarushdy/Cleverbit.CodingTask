@@ -1,0 +1,23 @@
+<form name="homeForm" #homelogin="ngForm" (ngSubmit) ="SubmitNumber()">
+    <div class="container">
+
+        <div class="header">
+           <h2>Welcome to {{gameName}} - The expire time for this game: {{expireTime}}</h2>
+        </div>
+        
+<div class="content">
+
+    <label>Click here to generate random number: </label>
+    <input type="button" value="Play Now" (click)="GenerateNumber()">
+
+<div class="result" id="result" hidden>
+    <label>Your generated number is: {{generatedNumber}}</label>
+    <input type="submit" value="Submit Number">
+</div>
+
+
+</div>
+
+</div>
+
+</form>
